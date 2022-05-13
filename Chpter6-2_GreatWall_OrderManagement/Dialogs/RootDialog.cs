@@ -30,6 +30,11 @@ namespace GreatWall
 
             actions.Add(new CardAction() {Title = "1. Order", Value = "1", Type = ActionTypes.ImBack});
             actions.Add(new CardAction() {Title = "2. FAQ", Value = "2", Type = ActionTypes.ImBack});
+            actions.Add(new CardAction() { Title = "3. LUIS", Value = "3", Type = ActionTypes.ImBack });
+
+            message.Attachments.Add(
+                new HeroCard { Title = "Select 1 - 3 .>", Buttons = actions }.ToAttachment()
+                );
 
             message.Attachments.Add(                    //Create Hero Card & attachment
                 new HeroCard { Title = "Select 1 or 2.> ", Buttons = actions}.ToAttachment()
@@ -53,6 +58,10 @@ namespace GreatWall
             else if(strSelected == "2")
             {
                 context.Call(new FAQDialog(), DialogResumeAfter);
+            }
+            else if(strSelected == "3")
+            {
+                context.Call(new LuisDialog(),DialogResumeAfter)
             }
             else
             {
