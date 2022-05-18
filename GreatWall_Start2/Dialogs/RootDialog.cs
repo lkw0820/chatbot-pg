@@ -12,32 +12,29 @@ namespace GreatWall
     {
         protected int count = 1;
         string strMessage;
-        private string strWelcomeMessage = "[Great Wall Bot]";
+        private string strWelcomeMessage = "[안녕하세요 ! 저는 인공이에요! < 인공아~ > 라고 불러주세요!]";
 
         public Task StartAsync(IDialogContext context)
         {
+
             context.Wait(MessageReceivedAsync);
             return Task.CompletedTask;
         }   
         
         public async Task MessageReceivedAsync(IDialogContext context, 
                                                IAwaitable<object> result)
-        {            
+        {
             await context.PostAsync(strWelcomeMessage);    //return our reply to the user
+            
 
             var message = context.MakeMessage();        //Create message
             var actions = new List<CardAction>();       //Create List
 
-            actions.Add(new CardAction() {Title = "1. Order", Value = "1", Type = ActionTypes.ImBack});
-            actions.Add(new CardAction() {Title = "2. FAQ", Value = "2", Type = ActionTypes.ImBack});
-            actions.Add(new CardAction() { Title = "3. LUIS", Value = "3", Type = ActionTypes.ImBack });
-
-            message.Attachments.Add(
-                new HeroCard { Title = "Select 1 - 3 .>", Buttons = actions }.ToAttachment()
-                );
+            actions.Add(new CardAction() {Title = "1. 입학정보", Value = "1", Type = ActionTypes.ImBack});
+            actions.Add(new CardAction() {Title = "2. 공지사항", Value = "2", Type = ActionTypes.ImBack});
 
             message.Attachments.Add(                    //Create Hero Card & attachment
-                new HeroCard { Title = "Select 1 or 2.> ", Buttons = actions}.ToAttachment()
+                new HeroCard { Title = "입학처에 오신 여러분을 환영합니다.\n 1.입학정보 2.공지사항", Buttons = actions}.ToAttachment()
             );
 
             await context.PostAsync(message);           //return our reply to the user
@@ -53,15 +50,11 @@ namespace GreatWall
             
             if(strSelected == "1")
             {
-                context.Call(new OrderDialog(), DialogResumeAfter);
+                context.Call(new JoinDialog(), DialogResumeAfter);
             }
             else if(strSelected == "2")
             {
                 context.Call(new FAQDialog(), DialogResumeAfter);
-            }
-            else if(strSelected == "3")
-            {
-               // context.Call(new LUISDialog(), DialogResumeAfter);
             }
             else
             {
