@@ -1,9 +1,11 @@
 using System;
 using System.Threading.Tasks;
-
+using GreatWall.Helpers;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
-using System.Collections.Generic;       //Add for List<>
+using System.Collections.Generic;
+using GreatWall.Dialogs;
+//Add for List<>
 
 namespace GreatWall
 {
@@ -12,29 +14,33 @@ namespace GreatWall
     {
         protected int count = 1;
         string strMessage;
-        private string strWelcomeMessage = "[안녕하세요 ! 저는 인공이에요! < 인공아~ > 라고 불러주세요!]";
+        private string strWelcomeMessage = "메뉴를 선택해주세요";
 
-        public Task StartAsync(IDialogContext context)
+        public async Task StartAsync(IDialogContext context)
         {
-
             context.Wait(MessageReceivedAsync);
-            return Task.CompletedTask;
+            //return Task.CompletedTask;
         }   
         
         public async Task MessageReceivedAsync(IDialogContext context, 
                                                IAwaitable<object> result)
         {
-            await context.PostAsync(strWelcomeMessage);    //return our reply to the user
+            //await context.PostAsync(strWelcomeMessage);    //return our reply to the user
             
 
             var message = context.MakeMessage();        //Create message
             var actions = new List<CardAction>();       //Create List
 
-            actions.Add(new CardAction() {Title = "1. 입학정보", Value = "1", Type = ActionTypes.ImBack});
-            actions.Add(new CardAction() {Title = "2. 공지사항", Value = "2", Type = ActionTypes.ImBack});
+            actions.Add(new CardAction() {Title = "1. 공지사항", Value = "1", Type = ActionTypes.ImBack});
+            actions.Add(new CardAction() {Title = "2. 모집일정", Value = "2", Type = ActionTypes.ImBack});
+            actions.Add(new CardAction() {Title = "3. 수시전형", Value = "3", Type = ActionTypes.ImBack });
+            actions.Add(new CardAction() {Title = "4. 정시전형", Value = "4", Type = ActionTypes.ImBack });
+            actions.Add(new CardAction() {Title = "5. 산업체위탁", Value = "5", Type = ActionTypes.ImBack });
+            actions.Add(new CardAction() {Title = "6. 편입학", Value = "6", Type = ActionTypes.ImBack });
+            actions.Add(new CardAction() {Title = "7. 전공심화", Value = "7", Type = ActionTypes.ImBack });
 
             message.Attachments.Add(                    //Create Hero Card & attachment
-                new HeroCard { Title = "입학처에 오신 여러분을 환영합니다.\n 1.입학정보 2.공지사항", Buttons = actions}.ToAttachment()
+                new HeroCard { Title = "입학처에 오신 여러분을 환영합니다.", Buttons = actions}.ToAttachment()
             );
 
             await context.PostAsync(message);           //return our reply to the user
@@ -54,8 +60,32 @@ namespace GreatWall
             }
             else if(strSelected == "2")
             {
+                strMessage = "[FAQ Service] Please enter a question.>";
+                await context.PostAsync(strMessage);
                 context.Call(new FAQDialog(), DialogResumeAfter);
             }
+            else if(strSelected == "3")
+            {
+                SQLHelper.PlusQuery("update UserChoice set susi = susi+1");
+                context.Call(new SusiDialog(), DialogResumeAfter);
+            }
+            else if (strSelected == "4")
+            {
+                context.Call(new JungsiDialog(), DialogResumeAfter);
+            }
+            else if (strSelected == "5")
+            {
+                context.Call(new IndustryDialog(), DialogResumeAfter);
+            }
+            else if (strSelected == "6")
+            {
+                context.Call(new TransferDialog(), DialogResumeAfter);
+            }
+            else if (strSelected == "7")
+            {
+                context.Call(new DeepCourseDialog(), DialogResumeAfter);
+            }
+
             else
             {
                 strMessage = "You have made a mistake. Please select again...";

@@ -10,7 +10,13 @@ namespace GreatWall.Helpers
 {
     public static class SQLHelper
     {
-        private const string strDBServer = "Server=tcp:greatwall-db-server3.database.windows.net,1433;Initial Catalog=GreatWall-DB;Persist Security Info=False;User ID=lkw;Password=rldnjs11@;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        private const string strDBServer = "Server=tcp:greatwall-db-servers.database.windows.net,1433;" +
+            "Initial Catalog=GreatWallDB;" +
+            "Persist Security Info=False;User ID=lmc2819;Password=dlalscjf1!;" +
+            "MultipleActiveResultSets=False;" +
+            "Encrypt=True;" +
+            "TrustServerCertificate=False;" +
+            "Connection Timeout=30;";
 
         public static DataSet RunSQL(string strQuery)
         {
@@ -38,6 +44,20 @@ namespace GreatWall.Helpers
             {
                 DB_Query.Parameters.Add(p);
             }
+
+            DB_CON.Open();
+            DB_Query.ExecuteNonQuery();
+            DB_CON.Close();
+        }
+
+        public static void PlusQuery(string strQuery)
+        {
+            SqlConnection DB_CON = new SqlConnection(strDBServer);
+            SqlCommand DB_Query = new SqlCommand(strQuery, DB_CON);
+            DataSet DB_DS = new DataSet();
+
+            //Parameter
+            DB_Query.Parameters.Clear();
 
             DB_CON.Open();
             DB_Query.ExecuteNonQuery();

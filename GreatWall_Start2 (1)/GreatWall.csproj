@@ -125,6 +125,9 @@
       <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="QnaMaker, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\QnaMaker.1.0.1\lib\net452\QnaMaker.dll</HintPath>
+    </Reference>
     <Reference Include="QnAMakerDialog, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\QnAMakerDialog.3.1.2\lib\net46\QnAMakerDialog.dll</HintPath>
     </Reference>
@@ -174,9 +177,15 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Dialogs\DeepCourseDialog.cs" />
     <Compile Include="Dialogs\FAQDialog.cs" />
+    <Compile Include="Dialogs\IndustryDialog.cs" />
     <Compile Include="Dialogs\JoinDialog.cs" />
+    <Compile Include="Dialogs\JungsiDialog.cs" />
+    <Compile Include="Dialogs\previousDialog.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
+    <Compile Include="Dialogs\SusiDialog.cs" />
+    <Compile Include="Dialogs\TransferDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
