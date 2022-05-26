@@ -58,31 +58,181 @@ namespace GreatWall.Dialogs
         {
             Activity activity = await result as Activity;
             string strSelected = activity.Text.Trim();
+            var message = context.MakeMessage();
+            var actions = new List<CardAction>();
 
             if (strSelected == "0")
             {
-                context.Call(new RootDialog(),null);
+                context.Done("root");
             }
-            //else if (strSelected == "2")
-            //{
-            //    strMessage = "[FAQ Service] Please enter a question.>";
-            //    await context.PostAsync(strMessage);
-            //    context.Call(new FAQDialog(), DialogResumeAfter);
-            //}
-            //else if (strSelected == "3")
-            //{
-            //    context.Call(new SusiDialog(), DialogResumeAfter);
-            //}
-            //else
-            //{
-            //    strMessage = "You have made a mistake. Please select again...";
-            //    await context.PostAsync(strMessage);
-            //    context.Wait(SendWelcomeMessageAsync);
-            //}
+            else if (strSelected == "11")
+            {
+                context.Call(this, DialogResumeAfter);
+            }
+            else if (strSelected == "1")
+            {
+                actions.Add(new CardAction()
+                {
+                    Title = "차트 보기"
+,
+                    Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=9&zoom=auto,-15,842",
+                    Type = ActionTypes.ShowImage
+                }); ;
+                actions.Add(new CardAction() { Title = "이전으로", Value = "11", Type = ActionTypes.ImBack });
+                //context.Call(new previousDialog(), DialogResumeAfter);
+                message.Attachments.Add(                    //Create Hero Card & attachment
+                    new HeroCard
+                    {
+                        Title = "모집인원 입니다.",
+                        Buttons = actions
+                    }.ToAttachment()
+                    ); ;
+            }
+            else if (strSelected == "2")
+            {
+                actions.Add(new CardAction()
+                {
+                    Title = "차트 보기"
+,
+                    Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=12&zoom=auto,-15,802",
+                    Type = ActionTypes.ShowImage
+                }); ;
+                //context.Call(new previousDialog(), DialogResumeAfter);
+                message.Attachments.Add(                    //Create Hero Card & attachment
+                   new HeroCard
+                   {
+                       Title = "지원자격 입니다.",
+                       Buttons = actions
+                   }.ToAttachment()
+                   ); ;
+            }
+            else if (strSelected == "3")
+            {
+                actions.Add(new CardAction()
+                {
+                    Title = "차트 보기"
+,
+                    Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=11&zoom=auto,-15,842",
+                    Type = ActionTypes.ShowImage
+                }); ;
+                //context.Call(new previousDialog(), DialogResumeAfter);
+                message.Attachments.Add(                    //Create Hero Card & attachment
+                   new HeroCard
+                   {
+                       Title = "전형일정 입니다.",
+                       Buttons = actions
+                   }.ToAttachment()
+                   ); ;
+            }
+            else if (strSelected == "4")
+            {
+                actions.Add(new CardAction()
+                {
+                    Title = "차트 보기"
+,
+                    Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=14&zoom=auto,-15,630",
+                    Type = ActionTypes.ShowImage
+                }); ;
+                //context.Call(new previousDialog(), DialogResumeAfter);
+                message.Attachments.Add(                    //Create Hero Card & attachment
+                   new HeroCard
+                   {
+                       Title = "제출서류 입니다.",
+                       Buttons = actions
+                   }.ToAttachment()
+                   ); ;
+            }
+            else if (strSelected == "5")
+            {
+                actions.Add(new CardAction()
+                {
+                    Title = "차트 보기"
+,
+                    Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=15&zoom=auto,-15,842",
+                    Type = ActionTypes.ShowImage
+                }); ;
+                //context.Call(new previousDialog(), DialogResumeAfter);
+                message.Attachments.Add(                    //Create Hero Card & attachment
+                   new HeroCard
+                   {
+                       Title = "성적반영 방법 입니다.",
+                       Buttons = actions
+                   }.ToAttachment()
+                   ); ;
+            }
+            else if (strSelected == "6")
+            {
+                actions.Add(new CardAction()
+                {
+                    Title = "차트 보기"
+,
+                    Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=18&zoom=auto,-15,842",
+                    Type = ActionTypes.ShowImage
+                }); ;
+                //context.Call(new previousDialog(), DialogResumeAfter);
+                message.Attachments.Add(                    //Create Hero Card & attachment
+                   new HeroCard
+                   {
+                       Title = "합격자 선발 및 발표 입니다.",
+                       Buttons = actions
+                   }.ToAttachment()
+                   ); ;
+            }
+            else if (strSelected == "7")
+            {
+                actions.Add(new CardAction()
+                {
+                    Title = "차트 보기"
+,
+                    Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=19&zoom=auto,-15,842",
+                    Type = ActionTypes.ShowImage
+                }); ;
+                //context.Call(new previousDialog(), DialogResumeAfter);
+                message.Attachments.Add(                    //Create Hero Card & attachment
+                   new HeroCard
+                   {
+                       Title = "원서접수 비용 입니다.",
+                       Buttons = actions
+                   }.ToAttachment()
+                   ); ;
+            }
             else if (strSelected == "8")
             {
-                context.Call(new previousDialog(), DialogResumeAfter);
+                actions.Add(new CardAction()
+                {
+                    Title = "차트 보기"
+                ,
+                    Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=22&zoom=auto,-15,766",
+                    Type = ActionTypes.ShowImage
+                }); ;
+                //context.Call(new previousDialog(), DialogResumeAfter);
+                message.Attachments.Add(                    //Create Hero Card & attachment
+                    new HeroCard
+                    {
+                        Title = "전년도 입시 결과 입니다.",
+                        Buttons = actions
+                    }.ToAttachment()
+                    ); ;
             }
+            else if (strSelected == "9")
+            {
+                actions.Add(new CardAction()
+                {
+                    Title = "차트 보기"
+,
+                    Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=20&zoom=auto,-15,842",
+                    Type = ActionTypes.ShowImage
+                }); ;
+                //context.Call(new previousDialog(), DialogResumeAfter);
+                message.Attachments.Add(                    //Create Hero Card & attachment
+                   new HeroCard
+                   {
+                       Title = "안내사항 입니다.",
+                       Buttons = actions
+                   }.ToAttachment()
+                   ); ;
+            }
+            await context.PostAsync(message);
         }
         public async Task DialogResumeAfter(IDialogContext context, IAwaitable<string> result)
         {

@@ -50,7 +50,7 @@ namespace GreatWall.Dialogs
            ) ;
 
             await context.PostAsync(message);
-            context.Wait(this.MessageReceivedAsync);
+            //context.Wait(JungsiSelect);
         }
     }
 }
