@@ -63,11 +63,13 @@ namespace GreatWall.Dialogs
 
             if (strSelected == "0")
             {
-                context.Done("root");
+                context.Done("");
+                
             }
             else if (strSelected == "11")
             {
                 context.Call(this, DialogResumeAfter);
+                context.Done("");
             }
             else if (strSelected == "1")
             {
@@ -97,6 +99,7 @@ namespace GreatWall.Dialogs
                     Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=12&zoom=auto,-15,802",
                     Type = ActionTypes.ShowImage
                 }); ;
+                actions.Add(new CardAction() { Title = "이전으로", Value = "11", Type = ActionTypes.ImBack });
                 //context.Call(new previousDialog(), DialogResumeAfter);
                 message.Attachments.Add(                    //Create Hero Card & attachment
                    new HeroCard
@@ -115,6 +118,7 @@ namespace GreatWall.Dialogs
                     Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=11&zoom=auto,-15,842",
                     Type = ActionTypes.ShowImage
                 }); ;
+                actions.Add(new CardAction() { Title = "이전으로", Value = "11", Type = ActionTypes.ImBack });
                 //context.Call(new previousDialog(), DialogResumeAfter);
                 message.Attachments.Add(                    //Create Hero Card & attachment
                    new HeroCard
@@ -133,6 +137,7 @@ namespace GreatWall.Dialogs
                     Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=14&zoom=auto,-15,630",
                     Type = ActionTypes.ShowImage
                 }); ;
+                actions.Add(new CardAction() { Title = "이전으로", Value = "11", Type = ActionTypes.ImBack });
                 //context.Call(new previousDialog(), DialogResumeAfter);
                 message.Attachments.Add(                    //Create Hero Card & attachment
                    new HeroCard
@@ -151,6 +156,7 @@ namespace GreatWall.Dialogs
                     Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=15&zoom=auto,-15,842",
                     Type = ActionTypes.ShowImage
                 }); ;
+                actions.Add(new CardAction() { Title = "이전으로", Value = "11", Type = ActionTypes.ImBack });
                 //context.Call(new previousDialog(), DialogResumeAfter);
                 message.Attachments.Add(                    //Create Hero Card & attachment
                    new HeroCard
@@ -169,6 +175,7 @@ namespace GreatWall.Dialogs
                     Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=18&zoom=auto,-15,842",
                     Type = ActionTypes.ShowImage
                 }); ;
+                actions.Add(new CardAction() { Title = "이전으로", Value = "11", Type = ActionTypes.ImBack });
                 //context.Call(new previousDialog(), DialogResumeAfter);
                 message.Attachments.Add(                    //Create Hero Card & attachment
                    new HeroCard
@@ -187,6 +194,7 @@ namespace GreatWall.Dialogs
                     Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=19&zoom=auto,-15,842",
                     Type = ActionTypes.ShowImage
                 }); ;
+                actions.Add(new CardAction() { Title = "이전으로", Value = "11", Type = ActionTypes.ImBack });
                 //context.Call(new previousDialog(), DialogResumeAfter);
                 message.Attachments.Add(                    //Create Hero Card & attachment
                    new HeroCard
@@ -205,6 +213,7 @@ namespace GreatWall.Dialogs
                     Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=22&zoom=auto,-15,766",
                     Type = ActionTypes.ShowImage
                 }); ;
+                actions.Add(new CardAction() { Title = "이전으로", Value = "11", Type = ActionTypes.ImBack });
                 //context.Call(new previousDialog(), DialogResumeAfter);
                 message.Attachments.Add(                    //Create Hero Card & attachment
                     new HeroCard
@@ -223,6 +232,7 @@ namespace GreatWall.Dialogs
                     Value = "https://ipsi.inhatc.ac.kr/Web-home/plugin/pdfjs/web/viewer.html?file=%2Fsites%2Fipsi%2Fatchmnfl%2Fviewer%2F13%2F%2Ftemp_1635721183237100.tmp#page=20&zoom=auto,-15,842",
                     Type = ActionTypes.ShowImage
                 }); ;
+                actions.Add(new CardAction() { Title = "이전으로", Value = "11", Type = ActionTypes.ImBack });
                 //context.Call(new previousDialog(), DialogResumeAfter);
                 message.Attachments.Add(                    //Create Hero Card & attachment
                    new HeroCard
