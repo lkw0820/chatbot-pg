@@ -12,11 +12,9 @@ using GreatWall.Helpers;                //Add for CardHelper
 using System.Data;                      //Add for DB Connection
 using System.Data.SqlClient;            //Add for DB Connection
 using GreatWall.Model;                  //Add for Model
-
 namespace GreatWall.Dialogs
 {
-    [Serializable]
-    public class SusiDialog : IDialog<string>
+    public class TransferDialog : IDialog<string>
     {
         string strMessage;
         public async Task StartAsync(IDialogContext context)
@@ -43,43 +41,17 @@ namespace GreatWall.Dialogs
 
 
             message.Attachments.Add(                    //Create Hero Card & attachment
-               new HeroCard { Title = "수시전형 탭입니다. 메뉴를 선택해주세요!\n"+
-               "수시 1차 원서 접수 : 2022.09.13 ~ 2022.10.06\n" +
-               "수시 2차 원서 접수 : 2022.11.07 ~ 2022.11.21" 
-               , Buttons = actions }.ToAttachment()
+               new HeroCard
+               {
+                   Title = "편입학 탭입니다. 메뉴를 선택해주세요!\n" +
+               "편입학 원서 접수 : 2022.01.10 ~ 2022.01.26" 
+               ,
+                   Buttons = actions
+               }.ToAttachment()
            );
 
             await context.PostAsync(message);
-            //context.Wait(SusiSelect);
+            context.Wait(this.MessageReceivedAsync);
         }
-
-        //public async Task SusiSelect(IDialogContext context,
-        //                                      IAwaitable<object> result)
-        //{
-        //    Activity activity = await result as Activity;
-        //    string strSelected = activity.Text.Trim();
-
-        //    if (strSelected == "1")
-        //    {
-                
-        //    }
-        //    else if (strSelected == "2")
-        //    {
-        //        strMessage = "[FAQ Service] Please enter a question.>";
-        //        await context.PostAsync(strMessage);
-        //        context.Call(new FAQDialog(), DialogResumeAfter);
-        //    }
-        //    else if (strSelected == "3")
-        //    {
-        //        context.Call(new SusiDialog(), DialogResumeAfter);
-        //    }
-        //    else
-        //    {
-        //        strMessage = "You have made a mistake. Please select again...";
-        //        await context.PostAsync(strMessage);
-        //        context.Wait(SendWelcomeMessageAsync);
-        //    }
-        //}
-
     }
 }

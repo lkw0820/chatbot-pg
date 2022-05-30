@@ -5,18 +5,13 @@ using System.Web;
 
 using System.Data;                      //Add for DB Connection
 using System.Data.SqlClient;            //Add for DB Connection
+using System.Configuration;
 
 namespace GreatWall.Helpers
 {
     public static class SQLHelper
     {
-        private const string strDBServer = "Server=tcp:greatwall-db-servers.database.windows.net,1433;" +
-            "Initial Catalog=GreatWallDB;" +
-            "Persist Security Info=False;User ID=lmc2819;Password=dlalscjf1!;" +
-            "MultipleActiveResultSets=False;" +
-            "Encrypt=True;" +
-            "TrustServerCertificate=False;" +
-            "Connection Timeout=30;";
+        private const string strDBServer = "Server=tcp:greatall-db-server.database.windows.net,1433;Initial Catalog=GreatWallDB;Persist Security Info=False;User ID=rlf123wkd;Password=wlsgh233!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         public static DataSet RunSQL(string strQuery)
         {
@@ -49,5 +44,16 @@ namespace GreatWall.Helpers
             DB_Query.ExecuteNonQuery();
             DB_CON.Close();
         }
+        public static void PulsQuery(string str) //디비에서만 이용될때
+        {
+            SqlConnection DB_CON = new SqlConnection(strDBServer);
+            SqlCommand DB_Query = new SqlCommand(str, DB_CON);
+            DataSet DB_DS = new DataSet();
+
+            DB_CON.Open();
+            DB_Query.ExecuteNonQuery();
+            DB_CON.Close();
+        }
+       
     }
 }

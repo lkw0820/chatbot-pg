@@ -58,7 +58,8 @@ namespace GreatWall.Helpers
             return card.ToAttachment();
         }
 
-        //Create Receipt card & return
+        //Create
+        //card & return
         public static Attachment GetReceiptCard(string strTitle, List<ReceiptItem> lstItems, 
                                                 string strTotal, string strTax, string strVat)
         {
@@ -69,6 +70,16 @@ namespace GreatWall.Helpers
                 Total = strTotal,
                 Tax = strTax,                
                 Vat = strVat,
+            };
+            return card.ToAttachment();
+
+        }
+        public static Attachment RankingReceiptCard(string strTitle, List<ReceiptItem> lstItems)
+        {
+            ReceiptCard card = new ReceiptCard
+            {
+                Title = strTitle,
+                Items = lstItems
             };
             return card.ToAttachment();
 

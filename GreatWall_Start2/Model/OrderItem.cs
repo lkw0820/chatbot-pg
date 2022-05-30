@@ -12,5 +12,6 @@ namespace GreatWall.Model
         public string Title { get; set; }
         public int Quantity { get; set; }
         public Decimal Price { get; set; }
+        
     }
 }

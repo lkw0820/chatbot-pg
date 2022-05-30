@@ -71,8 +71,7 @@ namespace GreatWall
                     SQLHelper.ExecuteNonQuery("INSERT INTO Orders(TotalPrice, UserID, OrderDate) " +
                                               "VALUES(@TotalPrice, @UserID, GETDATE())", para);
 
-                    DataSet orderNumber = SQLHelper.RunSQL("SELECT MAX(OrderID) FROM Orders " +
-                                                           "WHERE UserID = '" + activity.Id + "'");
+                    DataSet orderNumber = SQLHelper.RunSQL("SELECT MAX(OrderID) FROM Orders WHERE UserID = '" + activity.Id + "'");
 
                     DataRow row = orderNumber.Tables[0].Rows[0];
                     int orderID = (int)row[0];

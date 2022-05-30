@@ -5,6 +5,9 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Collections.Generic;
 using GreatWall.Dialogs;
+using GreatWall.Helpers;
+using System.Data.SqlClient;
+using System.Data;
 //Add for List<>
 
 namespace GreatWall
@@ -14,42 +17,35 @@ namespace GreatWall
     {
         protected int count = 1;
         string strMessage;
-        private string strWelcomeMessage = "메뉴를 선택해주세요";
 
         public Task StartAsync(IDialogContext context)
         {
+            //SQLHelper.PulsQuery("update ChoiceData set count = count+1 Where name = 'Welcome'"); //누적 사용자 수 파악
+            return this.MessageReceivedAsync(context, null);
+        }
 
-            context.Wait(MessageReceivedAsync);
-            return Task.CompletedTask;
-        }   
-        
-        public async Task MessageReceivedAsync(IDialogContext context, 
+        public async Task MessageReceivedAsync(IDialogContext context,
                                                IAwaitable<object> result)
         {
-            await context.PostAsync(strWelcomeMessage);    //return our reply to the user
-            
-
             var message = context.MakeMessage();        //Create message
             var actions = new List<CardAction>();       //Create List
 
-            actions.Add(new CardAction() {Title = "1. 공지사항", Value = "1", Type = ActionTypes.ImBack});
-            actions.Add(new CardAction() {Title = "2. 모집일정", Value = "2", Type = ActionTypes.ImBack});
+            actions.Add(new CardAction() { Title = "1. 공지사항", Value = "1", Type = ActionTypes.ImBack });
+            actions.Add(new CardAction() { Title = "2. 모집일정", Value = "2", Type = ActionTypes.ImBack });
             actions.Add(new CardAction() { Title = "3. 수시전형", Value = "3", Type = ActionTypes.ImBack });
             actions.Add(new CardAction() { Title = "4. 정시전형", Value = "4", Type = ActionTypes.ImBack });
             actions.Add(new CardAction() { Title = "5. 산업체위탁", Value = "5", Type = ActionTypes.ImBack });
             actions.Add(new CardAction() { Title = "6. 편입학", Value = "6", Type = ActionTypes.ImBack });
             actions.Add(new CardAction() { Title = "7. 전공심화", Value = "7", Type = ActionTypes.ImBack });
-            actions.Add(new CardAction() { Title = "8. 외국인", Value = "8", Type = ActionTypes.ImBack });
-            actions.Add(new CardAction() { Title = "9. e-MU", Value = "9", Type = ActionTypes.ImBack });
-            actions.Add(new CardAction() { Title = "10. 재외국민", Value = "10", Type = ActionTypes.ImBack });
+            actions.Add(new CardAction() { Title = "8. 전형데이터베이스", Value = "8", Type = ActionTypes.ImBack });
 
             message.Attachments.Add(                    //Create Hero Card & attachment
-                new HeroCard { Title = "입학처에 오신 여러분을 환영합니다.", Buttons = actions}.ToAttachment()
+                new HeroCard { Title = "입학처에 오신 여러분을 환영합니다.", Buttons = actions }.ToAttachment()
             );
 
             await context.PostAsync(message);           //return our reply to the user
 
-            context.Wait(SendWelcomeMessageAsync);            
+            context.Wait(SendWelcomeMessageAsync);
         }
 
         public async Task SendWelcomeMessageAsync(IDialogContext context,
@@ -57,27 +53,52 @@ namespace GreatWall
         {
             Activity activity = await result as Activity;
             string strSelected = activity.Text.Trim();
-            
-            if(strSelected == "1")
+
+
+            if (strSelected == "1")
             {
                 context.Call(new JoinDialog(), DialogResumeAfter);
             }
-            else if(strSelected == "2")
+            else if (strSelected == "2")
             {
                 strMessage = "[FAQ Service] Please enter a question.>";
                 await context.PostAsync(strMessage);
                 context.Call(new FAQDialog(), DialogResumeAfter);
             }
-            else if(strSelected == "3")
+            else if (strSelected == "3")
             {
+                SQLHelper.PulsQuery("update ChoiceData set count = count+1 Where name = 'susi'"); //DB의 열에 +1
                 context.Call(new SusiDialog(), DialogResumeAfter);
+            }
+            else if (strSelected == "4")
+            {
+                SQLHelper.PulsQuery("update ChoiceData set count = count+1 Where name = 'jungsi'"); //DB의 열에 +1
+                context.Call(new JungsiDialog(), DialogResumeAfter);
+            }
+            else if (strSelected == "5")
+            {
+                SQLHelper.PulsQuery("update ChoiceData set count = count+1 Where name = 'indersty'"); //DB의 열에 +1
+                context.Call(new IndustryDialog(), DialogResumeAfter);
+            }
+            else if (strSelected == "6")
+            {
+                SQLHelper.PulsQuery("update ChoiceData set count = count+1 Where name = 'transfer'"); //DB의 열에 +1
+                context.Call(new TransferDialog(), DialogResumeAfter);
+            }
+            else if (strSelected == "7")
+            {
+                SQLHelper.PulsQuery("update ChoiceData set count = count+1 Where name = 'deepcourse'"); //DB의 열에 +1
+                context.Call(new DeepCourseDialog(), DialogResumeAfter);
+            }
+            else if (strSelected == "8")
+            {
+                context.Call(new DataBaseDialog(), DialogResumeAfter);
             }
             else
             {
-                strMessage = "You have made a mistake. Please select again...";
                 await context.PostAsync(strMessage);
                 context.Wait(SendWelcomeMessageAsync);
-            }     
+            }
         }
 
         public async Task DialogResumeAfter(IDialogContext context, IAwaitable<string> result)
